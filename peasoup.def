@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: nvidia/cuda:11.2.0-base-ubuntu18.04
+From: nvidia/cuda:10.2-devel-ubuntu18.04
 
 %labels
     Author Jedrzej Jawor 
@@ -10,7 +10,8 @@ From: nvidia/cuda:11.2.0-base-ubuntu18.04
     apt-get update -y && \
     apt-get --no-install-recommends -y install \
     git \
-    make \
+    gdb \
+    make
 
     export SOFTWARE=/software
     mkdir -p $SOFTWARE
@@ -18,16 +19,17 @@ From: nvidia/cuda:11.2.0-base-ubuntu18.04
 
     git clone -b master https://github.com/ewanbarr/dedisp.git &&\
     cd $SOFTWARE/dedisp &&\
-    git checkout 3aaa448 &&\
-    sed -i "s|CUDA_PATH ?= /usr/local/cuda|CUDA_PATH ?= /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
-    make -j 32 &&\
+    git checkout arch61 &&\
+    # sed -i "s|CUDA_PATH ?= /usr/local/cuda|CUDA_PATH ?= /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
+    make &&\
     make install
 
     cd $SOFTWARE
     git clone -b master https://github.com/ewanbarr/peasoup.git &&\
     cd  $SOFTWARE/peasoup &&\
     git checkout e44112b &&\
-    sed -i "s|CUDA_DIR   = /usr/local/cuda/|CUDA_PATH ?= /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
-    sed -i "s|THRUST_DIR = /usr/local/cuda|THRUST_DIR ?= /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0/include|g" Makefile.inc &&\
-    make -j 32 &&\
+    # sed -i "s|CUDA_DIR   = /usr/local/cuda/|CUDA_DIR  = /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
+    # sed -i "s|THRUST_DIR = /usr/local/cuda|THRUST_DIR = /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0/include|g" Makefile.inc &&\
+    # sed -i "s|DEDISP_DIR = /usr/local/|DEDISP_DIR = /usr/local/lib|g" Makefile.inc &&\
+    make &&\
     make install
