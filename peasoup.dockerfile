@@ -17,7 +17,7 @@ make install
 
 RUN git clone -b master https://github.com/ewanbarr/peasoup.git &&\
 cd peasoup &&\
-git checkout e44112b &&\
+git checkout accel_plan_fix &&\
 # sed -i "s|DEDISP_DIR = /usr/local/|DEDISP_DIR = /usr/local/lib|g" Makefile.inc &&\
 make -j 32 &&\
 make install
