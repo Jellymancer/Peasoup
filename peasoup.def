@@ -19,17 +19,11 @@ From: nvidia/cuda:10.2-devel-ubuntu18.04
 
     git clone -b master https://github.com/ewanbarr/dedisp.git &&\
     cd $SOFTWARE/dedisp &&\
-    git checkout arch61 &&\
-    # sed -i "s|CUDA_PATH ?= /usr/local/cuda|CUDA_PATH ?= /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
     make &&\
     make install
 
     cd $SOFTWARE
-    git clone -b master https://github.com/ewanbarr/peasoup.git &&\
+    git clone -b accel_plan_fix  https://github.com/ewanbarr/peasoup.git &&\
     cd  $SOFTWARE/peasoup &&\
-    git checkout e44112b &&\
-    # sed -i "s|CUDA_DIR   = /usr/local/cuda/|CUDA_DIR  = /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0|g" Makefile.inc &&\
-    # sed -i "s|THRUST_DIR = /usr/local/cuda|THRUST_DIR = /mpcdf/soft/CentOS_7/packages/x86_64/cuda/11.2.0/include|g" Makefile.inc &&\
-    # sed -i "s|DEDISP_DIR = /usr/local/|DEDISP_DIR = /usr/local/lib|g" Makefile.inc &&\
     make &&\
     make install
