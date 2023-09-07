@@ -1,4 +1,4 @@
-FROM cupy/nvidia-cuda:10.2-devel-ubuntu18.04
+FROM nvidia/cuda:11.0.3-devel-ubuntu16.04
 
 RUN apt-get update && \
     apt-get install -y software-properties-common
@@ -22,7 +22,7 @@ RUN ldconfig /usr/local/lib
 
 RUN git clone https://github.com/ewanbarr/peasoup.git && \
     cd peasoup && \
-    git checkout accel_plan_fix &&\
+    git checkout dedisp_gulping &&\
     make -j 32 && \
     make install
 

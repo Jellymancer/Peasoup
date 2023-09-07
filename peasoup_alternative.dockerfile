@@ -1,11 +1,14 @@
-FROM nvidia/cuda:10.2-devel-ubuntu16.04
+FROM nvidia/cuda:11.0.3-devel-ubuntu16.04
 
-# Python3.6 stuff
 RUN apt-get update && \
-  apt-get install -y software-properties-common
+    apt-get install -y software-properties-common
 RUN apt-get update
 
-RUN apt-get install -y build-essential git gdb
+RUN apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    gdb \
+    make
 
 WORKDIR /usr/local/software/
 
@@ -19,7 +22,7 @@ RUN ldconfig /usr/local/lib
 
 RUN git clone https://github.com/ewanbarr/peasoup.git && \
     cd peasoup && \
-    git checkout dedisp_gulping &&\
+    git checkout accel_plan_fix &&\
     make -j 32 && \
     make install
 
